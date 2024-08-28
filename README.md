@@ -92,3 +92,5 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Disclaimer
 
 This tool is provided as-is, without any warranty. Always review the scripts and understand what they do before running them in your environment.
+
+curl -sSL https://raw.githubusercontent.com/andrey-ilin/gitleaks-pre-commit/main/install.sh | bash
