@@ -29,8 +29,13 @@ curl -sSL https://raw.githubusercontent.com/andrey-ilin/gitleaks-pre-commit/main
 # Make the hook executable
 chmod +x .git/hooks/pre-commit
 
+# Download the .gitleaks.toml configuration file
+echo "Downloading .gitleaks.toml configuration..."
+curl -sSL https://raw.githubusercontent.com/andrey-ilin/gitleaks-pre-commit/main/.gitleaks.toml > .gitleaks.toml
+
 # Enable the pre-commit hook
 git config hooks.precommit.enabled true
 
-echo "Pre-commit hook installed successfully!"
+echo "Pre-commit hook and Gitleaks configuration installed successfully!"
 echo "The hook is now enabled. To disable it, run: git config hooks.precommit.enabled false"
+echo "The .gitleaks.toml configuration file has been placed in the root of your repository."

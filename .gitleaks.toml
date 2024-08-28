@@ -1,0 +1,61 @@
+# Title for the configuration file
+title = "Gitleaks Configuration"
+
+# Global configuration
+[allowlist]
+description = "Global allowlist"
+paths = [
+    '''node_modules''',
+    '''logs'''
+]
+
+# Rules
+[[rules]]
+id = "generic-api-key"
+description = "Generic API Key"
+regex = '''(?i)(?:key|api|token|secret|password)\s*[:=]\s*['"][0-9a-zA-Z]{16,}['"]'''
+tags = ["key", "API", "generic"]
+[rules.allowlist]
+regexes = ['''EXAMPLE_API_KEY''']
+
+[[rules]]
+id = "generic-secret"
+description = "Generic Secret"
+regex = '''(?i)(?:secret|password)\s*[:=]\s*['"][0-9a-zA-Z]{8,}['"]'''
+tags = ["key", "generic", "secret"]
+
+[[rules]]
+id = "kubernetes-secret"
+description = "Kubernetes Secret"
+regex = '''(?i)(?:kind:\s*Secret\b)'''
+tags = ["kubernetes", "secret"]
+
+[[rules]]
+id = "base64-encoded-secret"
+description = "Base64 Encoded Secret"
+regex = '''(?i)(?:key|token|secret|password):\s*[A-Za-z0-9+/]{20,}={0,2}'''
+tags = ["key", "base64", "secret"]
+
+[[rules]]
+id = "github-token"
+description = "GitHub Token"
+regex = '''(?i)(?:github|gh)(?:[-_])?(?:token|access[-_]?token)\s*[:=]\s*['"]?[0-9a-zA-Z]{35,40}['"]?'''
+tags = ["token", "github"]
+
+[[rules]]
+id = "aws-access-key"
+description = "AWS Access Key ID"
+regex = '''(?i)AKIA[0-9A-Z]{16}'''
+tags = ["key", "AWS"]
+
+[[rules]]
+id = "aws-secret-key"
+description = "AWS Secret Access Key"
+regex = '''(?i)(?:aws)?_?secret_?(?:access)?_?key(?:_?id)?\s*(?::|=)\s*[A-Za-z0-9/\+=]{40}'''
+tags = ["key", "AWS"]
+
+[[rules]]
+id = "ssh-private-key"
+description = "SSH Private Key"
+regex = '''-----BEGIN (?:RSA|DSA|EC|OPENSSH) PRIVATE KEY-----'''
+tags = ["key", "SSH"]
